@@ -1,25 +1,19 @@
-@reference "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-zinc-50 text-zinc-900 antialiased;
+    @apply bg-gray-50 text-gray-900;
   }
 }
 
 @layer components {
   .card {
-    @apply bg-white rounded-2xl border border-zinc-200 p-6;
-  }
-
-  .card-glass {
-    @apply bg-white/70 backdrop-blur-xl rounded-2xl border border-zinc-200;
+    @apply bg-white rounded-lg border border-gray-200 p-6 shadow-sm;
   }
 
   .btn-primary {
-    @apply bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-500 transition-all duration-200 active:scale-95;
-  }
-
-  .btn-ghost {
-    @apply text-zinc-600 hover:text-zinc-900 px-3 py-2 rounded-lg hover:bg-zinc-100 transition;
+    @apply bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700;
   }
 }

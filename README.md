@@ -1,36 +1,167 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SaaS Analytics Dashboard
 
-## Getting Started
+A modern, responsive analytics dashboard built with Next.js, TypeScript, and Tailwind CSS. Features real-time data visualization, interactive filtering, and comprehensive accessibility support.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Real-time Data Simulation**: Config-driven data generation with realistic API response delays
+- **Interactive Charts**: Dynamic charts that respond to date range filters
+- **Advanced Table Features**: Sorting and pagination for customer management
+- **Responsive Design**: Optimized layouts for all screen sizes
+- **Accessibility First**: Full keyboard navigation and screen reader support
+- **Loading States**: Skeleton loaders and error handling for better UX
+- **Reusable Components**: Modular UI primitives for consistent design
+
+## 🏗️ Architecture
+
+### Data Flow
+
+```
+User Interaction → Component State → API Simulation → Data Processing → UI Update
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 1. Data Simulation Layer (`lib/mockData.ts`)
+- **Purpose**: Simulate realistic API responses without backend
+- **Features**:
+  - Configurable data generation parameters
+  - Asynchronous functions with configurable delays
+  - Date-range aware data filtering
+  - Dynamic data generation based on user preferences
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### 2. Component Layer
+- **StatCard**: KPI metric display with trend indicators
+- **ChartCard**: Chart containers with loading/error states
+- **DateRangeFilter**: Interactive date range selection
+- **Table**: Sortable, paginated data tables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### 3. Page Layer
+- **Dashboard**: Main analytics overview with real-time updates
+- **Customers**: Customer management with advanced filtering
 
-## Learn More
+### State Management
 
-To learn more about Next.js, take a look at the following resources:
+- **Local State**: React hooks for component-level state
+- **Data Fetching**: Async functions with loading/error states
+- **Filtering**: Real-time search and filter combinations
+- **Pagination**: Client-side pagination with sorting
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📊 Data Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Types (`types/index.ts`)
+```typescript
+interface Customer {
+  id: string;
+  name: string;
+  email: string;
+  company?: string;
+  status: 'active' | 'inactive' | 'pending';
+  createdAt: Date;
+  lastLogin?: Date;
+}
 
-## Deploy on Vercel
+interface KPIMetric {
+  name: string;
+  value: number;
+  unit?: string;
+  change?: number;
+  trend: 'up' | 'down' | 'stable';
+}
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+interface ChartData {
+  x: string | number;
+  y: number;
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Data Configuration
+- **Scalable**: Easily adjust data volume and generation parameters
+- **Realistic**: Varied data with trends and statistical distributions
+- **Configurable**: Date ranges, customer counts, and metric ranges
+
+## 🎨 UI Components
+
+### Reusable Primitives
+- **Card**: Base container with variants (default, elevated, glass)
+- **ChartContainer**: Specialized chart wrapper with loading states
+- **Skeleton**: Loading state placeholders
+- **DateRangeFilter**: Interactive date selection component
+
+### Accessibility Features
+- ARIA labels and descriptions
+- Keyboard navigation support
+- Screen reader compatibility
+- Focus management
+- Semantic HTML structure
+
+## 📱 Responsive Design
+
+### Breakpoints
+- **Mobile**: Single column layouts
+- **Tablet**: 2-column grids for metrics
+- **Desktop**: 4-column KPI cards, 2-column charts
+- **Large**: Optimized spacing and typography
+
+### Layout Strategy
+- CSS Grid for complex layouts
+- Flexbox for component alignment
+- Mobile-first responsive design
+- Consistent spacing system
+
+## 🔧 Development
+
+### Getting Started
+
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Run development server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Open** [http://localhost:3000](http://localhost:3000)
+
+### Project Structure
+```
+├── app/
+│   ├── components/          # Reusable UI components
+│   │   ├── Card.tsx        # Base card component
+│   │   ├── ChartCard.tsx   # Chart container
+│   │   ├── StatCard.tsx    # KPI display
+│   │   ├── DateRangeFilter.tsx # Date filtering
+│   │   └── Skeleton.tsx    # Loading states
+│   ├── dashboard/
+│   │   ├── page.tsx        # Main dashboard
+│   │   └── customers/
+│   │       └── page.tsx    # Customer management
+│   └── layout.tsx          # App layout
+├── lib/
+│   └── mockData.ts         # Data simulation
+└── types/
+    └── index.ts            # TypeScript definitions
+```
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+```bash
+npm run build
+npm run start
+```
+
+### Environment Variables
+No environment variables required - all data is simulated client-side.
+
+## 🤝 Contributing
+
+1. Follow the existing code style and patterns
+2. Add TypeScript types for new features
+3. Include accessibility features
+4. Test responsive behavior
+5. Update documentation
+
+## 📄 License
+
+This project is part of a development exercise and is not licensed for production use.

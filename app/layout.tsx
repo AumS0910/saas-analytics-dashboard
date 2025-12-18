@@ -1,4 +1,6 @@
 import "./globals.css";
+import { ToastProvider } from "./components/Toast";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export default function RootLayout({
   children,
@@ -7,8 +9,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-zinc-50 text-zinc-900">
-        {children}
+      <body className="bg-gray-50 text-gray-900">
+        <AuthProvider>
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </AuthProvider>
       </body>
     </html>
   );
