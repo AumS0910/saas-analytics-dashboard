@@ -8,6 +8,8 @@ A modern, responsive analytics dashboard built with Next.js, TypeScript, and Tai
 👉 **Live URL:** https://saas-analytics-dashboard-six.vercel.app/
 
 
+
+
 ## 💡 Project Purpose & Real-World Use
 
 This dashboard represents the **analytics interface of a SaaS product** that helps founders, product managers, and business teams monitor key business metrics in one place.
