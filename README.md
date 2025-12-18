@@ -9,6 +9,23 @@ A modern, responsive analytics dashboard built with Next.js, TypeScript, and Tai
 
 
 
+## 🖼️ Screenshots
+
+### Dashboard Overview
+![Dashboard](./screenshots/dashboard.png)
+
+### Analytics View
+![Analytics](./screenshots/analytics.png)
+
+### Customers Management
+![Customers](./screenshots/customers.png)
+
+### Authentication
+![Login](./screenshots/login.png)
+
+
+
+
 
 ## 💡 Project Purpose & Real-World Use
 
