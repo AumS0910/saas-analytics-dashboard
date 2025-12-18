@@ -55,6 +55,9 @@ export default function DateRangeFilter({ selectedRange, onRangeChange, classNam
     };
 
     const getCurrentLabel = () => {
+        if (selectedRange === 'custom') {
+            return 'Custom range';
+        }
         const range = ranges.find(r => r.value === selectedRange);
         return range?.label || 'Select range';
     };

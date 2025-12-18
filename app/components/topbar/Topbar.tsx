@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { User, Settings, LogOut, Search } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -17,6 +18,8 @@ const getPageTitle = (pathname: string) => {
             return 'Reports';
         case '/dashboard/settings':
             return 'Settings';
+        case '/dashboard/profile':
+            return 'Profile';
         default:
             return 'Dashboard';
     }
@@ -65,16 +68,24 @@ export default function Topbar() {
                         <div className="absolute right-0 top-14 w-56 bg-white/95 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl z-10">
                             <ul className="py-2">
                                 <li>
-                                    <button className="flex items-center w-full px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 transition-colors rounded-lg mx-2">
+                                    <Link
+                                        href="/dashboard/profile"
+                                        className="flex items-center w-full px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 transition-colors rounded-lg mx-2"
+                                        onClick={() => setIsDropdownOpen(false)}
+                                    >
                                         <User className="w-4 h-4 mr-3 text-slate-400" />
                                         Profile
-                                    </button>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <button className="flex items-center w-full px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 transition-colors rounded-lg mx-2">
+                                    <Link
+                                        href="/dashboard/settings"
+                                        className="flex items-center w-full px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 transition-colors rounded-lg mx-2"
+                                        onClick={() => setIsDropdownOpen(false)}
+                                    >
                                         <Settings className="w-4 h-4 mr-3 text-slate-400" />
                                         Settings
-                                    </button>
+                                    </Link>
                                 </li>
                                 <li>
                                     <button
