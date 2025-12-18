@@ -2,6 +2,27 @@
 
 A modern, responsive analytics dashboard built with Next.js, TypeScript, and Tailwind CSS. Features real-time data visualization, interactive filtering, and comprehensive accessibility support.
 
+
+## 🌐 Live Demo
+
+👉 **Live URL:** https://saas-analytics-dashboard-six.vercel.app/
+
+
+## 💡 Project Purpose & Real-World Use
+
+This dashboard represents the **analytics interface of a SaaS product** that helps founders, product managers, and business teams monitor key business metrics in one place.
+
+### Real-world scenarios:
+- **Startup founders** track revenue growth, user activity, and conversion rates
+- **Product teams** monitor feature adoption and customer engagement
+- **Marketing teams** analyze user acquisition and retention trends
+- **Customer success teams** identify inactive or churn-risk users
+
+Although the current implementation uses simulated data, the architecture mirrors real production dashboards where data would be fetched from analytics services such as Mixpanel, Segment, Stripe, or internal APIs.
+
+The project focuses on **frontend system design**, **data visualization**, and **UX for analytics-heavy applications**, which are core responsibilities of frontend engineers in SaaS companies.
+
+
 ## 🚀 Features
 
 - **Real-time Data Simulation**: Config-driven data generation with realistic API response delays
