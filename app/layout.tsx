@@ -1,10 +1,5 @@
 import "./globals.css";
 
-export const metadata = {
-  title: "SaaS Analytics Dashboard",
-  description: "Modern analytics platform",
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -12,7 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-black text-zinc-100">
+      <body className="bg-zinc-50 text-zinc-900">
         {children}
       </body>
     </html>
