@@ -67,6 +67,9 @@ export default function DashboardPage() {
         setDateRange(range);
         if (customRange) {
             setCustomDateRange(customRange);
+        } else if (range !== 'custom') {
+            // Reset custom date range when switching to predefined ranges
+            setCustomDateRange(null);
         }
         // Data will reload due to useEffect dependency
     };

@@ -65,39 +65,49 @@ export default function Topbar() {
                     </button>
 
                     {isDropdownOpen && (
-                        <div className="absolute right-0 top-14 w-56 bg-white/95 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl z-10">
-                            <ul className="py-2">
-                                <li>
-                                    <Link
-                                        href="/dashboard/profile"
-                                        className="flex items-center w-full px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 transition-colors rounded-lg mx-2"
-                                        onClick={() => setIsDropdownOpen(false)}
-                                    >
-                                        <User className="w-4 h-4 mr-3 text-slate-400" />
-                                        Profile
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="/dashboard/settings"
-                                        className="flex items-center w-full px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 transition-colors rounded-lg mx-2"
-                                        onClick={() => setIsDropdownOpen(false)}
-                                    >
-                                        <Settings className="w-4 h-4 mr-3 text-slate-400" />
-                                        Settings
-                                    </Link>
-                                </li>
-                                <li>
-                                    <button
-                                        onClick={handleLogout}
-                                        className="flex items-center w-full px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 transition-colors rounded-lg mx-2"
-                                    >
-                                        <LogOut className="w-4 h-4 mr-3 text-slate-400" />
-                                        Logout
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
+                        <>
+                            {/* Dropdown */}
+                            <div className="absolute left-1/2 top-12 -translate-x-1/2 w-48 bg-white/95 backdrop-blur-xl border border-white/20 rounded-xl shadow-lg z-[60] mt-1">
+                                <ul className="py-1">
+                                    <li>
+                                        <Link
+                                            href="/dashboard/profile"
+                                            className="flex items-center w-full px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+                                            onClick={() => setIsDropdownOpen(false)}
+                                        >
+                                            <User className="w-4 h-4 mr-3 text-slate-400" />
+                                            Profile
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/dashboard/settings"
+                                            className="flex items-center w-full px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+                                            onClick={() => setIsDropdownOpen(false)}
+                                        >
+                                            <Settings className="w-4 h-4 mr-3 text-slate-400" />
+                                            Settings
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="flex items-center w-full px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+                                        >
+                                            <LogOut className="w-4 h-4 mr-3 text-slate-400" />
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            {/* Overlay to close dropdown */}
+                            <div
+                                className="fixed inset-0 z-50"
+                                onClick={() => setIsDropdownOpen(false)}
+                                aria-hidden="true"
+                            />
+                        </>
                     )}
                 </div>
             </div>

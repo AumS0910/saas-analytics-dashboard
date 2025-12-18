@@ -13,8 +13,16 @@ interface DateRangeFilterProps {
 
 export default function DateRangeFilter({ selectedRange, onRangeChange, className = "" }: DateRangeFilterProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [customStart, setCustomStart] = useState('');
-    const [customEnd, setCustomEnd] = useState('');
+    const [showCustomInputs, setShowCustomInputs] = useState(false);
+    const [customStart, setCustomStart] = useState(() => {
+        const date = new Date();
+        date.setDate(date.getDate() - 30);
+        return date.toISOString().split('T')[0];
+    });
+    const [customEnd, setCustomEnd] = useState(() => {
+        const date = new Date();
+        return date.toISOString().split('T')[0];
+    });
 
     const ranges = [
         { value: '7d' as DateRange, label: 'Last 7 days' },
@@ -24,9 +32,12 @@ export default function DateRangeFilter({ selectedRange, onRangeChange, classNam
 
     const handleRangeSelect = (range: DateRange) => {
         if (range === 'custom') {
-            setIsOpen(true); // Keep dropdown open for custom selection
+            setShowCustomInputs(true);
+            onRangeChange(range);
+            // Don't close the dropdown - date inputs will appear
         } else {
             setIsOpen(false);
+            setShowCustomInputs(false);
             onRangeChange(range);
         }
     };
@@ -34,6 +45,7 @@ export default function DateRangeFilter({ selectedRange, onRangeChange, classNam
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Escape') {
             setIsOpen(false);
+            setShowCustomInputs(false);
         } else if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             setIsOpen(!isOpen);
@@ -47,10 +59,26 @@ export default function DateRangeFilter({ selectedRange, onRangeChange, classNam
         if (customStart && customEnd) {
             const start = new Date(customStart);
             const end = new Date(customEnd);
-            if (start <= end) {
-                onRangeChange('custom', { start, end });
-                setIsOpen(false);
+
+            // Validate that start date is not after end date
+            if (start > end) {
+                alert('Start date cannot be after end date');
+                return;
             }
+
+            // Validate that the date range is not too large (e.g., max 1 year)
+            const diffTime = Math.abs(end.getTime() - start.getTime());
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if (diffDays > 365) {
+                alert('Date range cannot exceed 1 year');
+                return;
+            }
+
+            onRangeChange('custom', { start, end });
+            setIsOpen(false);
+            setShowCustomInputs(false);
+        } else {
+            alert('Please select both start and end dates');
         }
     };
 
@@ -78,7 +106,7 @@ export default function DateRangeFilter({ selectedRange, onRangeChange, classNam
             </button>
 
             {isOpen && (
-                <div className="absolute top-full mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                <div className="absolute top-full mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-40">
                     <div className="py-1">
                         {ranges.map((range) => (
                             <button
@@ -95,7 +123,7 @@ export default function DateRangeFilter({ selectedRange, onRangeChange, classNam
                         ))}
                     </div>
 
-                    {selectedRange === 'custom' && (
+                    {showCustomInputs && (
                         <div className="border-t border-gray-200 p-4 space-y-3">
                             <div>
                                 <label className="block text-xs font-medium text-gray-700 mb-1">Start Date</label>
@@ -133,8 +161,11 @@ export default function DateRangeFilter({ selectedRange, onRangeChange, classNam
             {/* Overlay to close dropdown */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 z-40"
-                    onClick={() => setIsOpen(false)}
+                    className="fixed inset-0 z-30"
+                    onClick={() => {
+                        setIsOpen(false);
+                        setShowCustomInputs(false);
+                    }}
                     aria-hidden="true"
                 />
             )}
